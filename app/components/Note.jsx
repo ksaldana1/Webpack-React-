@@ -10,10 +10,7 @@ export default class Note extends React.Component {
   }
 
   render() {
-    if (this.state.editing) {
-      return this.renderEdit();
-    }
-    return this.renderNote();
+    return this.state.editing ? this.renderEdit() : this.renderNote();
   }
 
   renderEdit = () => {
@@ -26,7 +23,6 @@ export default class Note extends React.Component {
 
   renderNote = () => {
     const onDelete = this.props.onDelete;
-
     return <div onClick={this.edit}>
     <span>{this.props.task}</span>
     {onDelete ? this.renderDelete() : null }
