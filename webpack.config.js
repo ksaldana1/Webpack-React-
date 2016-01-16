@@ -13,8 +13,12 @@ const PATHS = {
 
 
 const common = {
-  // entry accept path or an object of entires
+
   entry: PATHS.app,
+
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
   output: {
     path: PATHS.build,
     filename: 'bundle.js'
@@ -26,6 +30,15 @@ const common = {
         test: /\.css$/,
         loaders: ['style', 'css'],
         // includes accepts either path or an array of paths (right to left evaluation)
+        include: PATHS.app
+      },
+      {
+        test: /\.jsx?$/,
+        loader: 'babel',
+        query: {
+          cacheDirectory: true,
+          presets: ['react', 'es2015', 'survivejs-kanban']
+        },
         include: PATHS.app
       }
     ]
@@ -42,6 +55,7 @@ const common = {
 // allow for multiple configurations depending on 'npm run ${TARGET}'
 if (TARGET === 'start' || !TARGET) {
   module.exports = merge(common, {
+    devtool: 'eval-source-map',
     devServer: {
       historyApiFallback: true,
       hot: true,
