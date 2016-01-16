@@ -1,6 +1,4 @@
 import React from 'react';
-
-import Note from './Note.jsx';
 import Notes from './Notes.jsx'
 
 import NoteActions from '../actions/NoteActions';
